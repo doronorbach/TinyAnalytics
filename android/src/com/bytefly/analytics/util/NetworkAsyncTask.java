@@ -24,7 +24,9 @@ public class NetworkAsyncTask extends AsyncTask<String, Integer, Long> {
 	protected Long doInBackground(String... params) {
 		wconnect = new AnalyticsHttpConnector();
 		res = wconnect.executeHttpDoAction(act, params[0]);
-		Log.d("Analytics", Boolean.toString(res));
+		if(Debug.debugging){
+			Log.d("Analytics", Boolean.toString(res));
+		}
 		return null;
 	}
 

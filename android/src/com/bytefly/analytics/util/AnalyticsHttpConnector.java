@@ -56,7 +56,9 @@ public class AnalyticsHttpConnector {
 					Secure.ANDROID_ID);
 			url += "&id=" + android_id;
 
-			Log.d(TAG, "url=" + url);
+			if(Debug.debugging){
+				Log.d(TAG, "url=" + url);
+			}
 
 			HttpClient client = new DefaultHttpClient();
 			HttpGet request = new HttpGet();
@@ -66,7 +68,9 @@ public class AnalyticsHttpConnector {
 			// set the user agent to from the phone os information
 			String useragent = "android-" + android.os.Build.VERSION.RELEASE;
 			request.setHeader("User-Agent", useragent);
-			Log.d(TAG, "useragent=" + useragent);
+			if(Debug.debugging){
+				Log.d(TAG, "useragent=" + useragent);
+			}
 
 			// execute the http GET
 			HttpResponse response = client.execute(request);
@@ -81,7 +85,9 @@ public class AnalyticsHttpConnector {
 			}
 			in.close();
 			String page = sb.toString();
-			Log.d(TAG, "response=" + page);
+			if(Debug.debugging){
+				Log.d(TAG, "response=" + page);
+			}
 
 			//
 			// Note that the reponse is JSON.
@@ -92,10 +98,18 @@ public class AnalyticsHttpConnector {
 			int resultjson = (int) res.getLong("result");
 			error_code = resultjson;
 			if (resultjson == 0) {
-				Log.d(TAG, "operation success");
+				if(Debug.debugging){
+					if(Debug.debugging){
+						Log.d(TAG, "operation success");
+					}
+				}
 			} else {
-				// error response code
-				Log.d(TAG, "error response code=" + resultjson);
+				if(Debug.debugging){
+					if(Debug.debugging){
+						//error response code
+						Log.d(TAG, "error response code=" + resultjson);
+					}
+				}
 			}
 		} catch (Exception e) {
 
